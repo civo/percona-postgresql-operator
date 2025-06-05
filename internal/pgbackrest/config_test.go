@@ -18,10 +18,10 @@ import (
 	"k8s.io/apimachinery/pkg/api/resource"
 	"sigs.k8s.io/yaml"
 
-	"github.com/percona/percona-postgresql-operator/internal/initialize"
-	"github.com/percona/percona-postgresql-operator/internal/naming"
-	"github.com/percona/percona-postgresql-operator/internal/testing/require"
-	"github.com/percona/percona-postgresql-operator/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
+	"github.com/civo/percona-postgresql-operator/internal/initialize"
+	"github.com/civo/percona-postgresql-operator/internal/naming"
+	"github.com/civo/percona-postgresql-operator/internal/testing/require"
+	"github.com/civo/percona-postgresql-operator/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
 )
 
 func TestCreatePGBackRestConfigMapIntent(t *testing.T) {

@@ -11,10 +11,10 @@ import (
 
 	corev1 "k8s.io/api/core/v1"
 
-	"github.com/percona/percona-postgresql-operator/internal/config"
-	"github.com/percona/percona-postgresql-operator/internal/feature"
-	"github.com/percona/percona-postgresql-operator/internal/naming"
-	"github.com/percona/percona-postgresql-operator/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
+	"github.com/civo/percona-postgresql-operator/internal/config"
+	"github.com/civo/percona-postgresql-operator/internal/feature"
+	"github.com/civo/percona-postgresql-operator/internal/naming"
+	"github.com/civo/percona-postgresql-operator/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
 )
 
 const (
@@ -536,6 +536,15 @@ chmod +x /tmp/pg_rewind_tde.sh
 		// - https://git.postgresql.org/gitweb/?p=postgresql.git;f=src/backend/access/transam/xlog.c;hb=REL_12_0#l5318
 		// TODO(cbandy): Remove this after 5.0 is EOL.
 		`rm -f "${postgres_data_directory}/recovery.signal"`,
+
+		func() string {
+			healthcheckScript := `
+until curl -k -f https://kubernetes.default.svc/healthz > /dev/null; do
+  echo "Waiting for Kubernetes API server to be ready..."
+  sleep 2
+done`
+			return healthcheckScript
+		}(),
 	}
 	script := strings.Join(filter(statements, func(s string) bool { return s != "remove" }), "\n")
 

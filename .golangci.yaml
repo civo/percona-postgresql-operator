@@ -35,7 +35,7 @@ linters-settings:
               See https://go.dev/doc/go1.16#ioutil
 
       not-tests:
-        files: ['!$test']
+        files: ["!$test"]
         deny:
           - pkg: net/http/httptest
             desc: Should be used only in tests.
@@ -43,14 +43,14 @@ linters-settings:
           - pkg: testing/*
             desc: The "testing" packages should be used only in tests.
 
-          - pkg: github.com/percona/percona-postgresql-operator/internal/testing/*
+          - pkg: github.com/civo/percona-postgresql-operator/internal/testing/*
             desc: The "internal/testing" packages should be used only in tests.
 
   exhaustive:
     default-signifies-exhaustive: true
 
   goimports:
-    local-prefixes: github.com/percona/percona-postgresql-operator
+    local-prefixes: github.com/civo/percona-postgresql-operator
 
   gomodguard:
     blocked:

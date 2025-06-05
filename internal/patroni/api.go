@@ -12,7 +12,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/percona/percona-postgresql-operator/internal/logging"
+	"github.com/civo/percona-postgresql-operator/internal/logging"
 )
 
 // API defines a general interface for interacting with the Patroni API.

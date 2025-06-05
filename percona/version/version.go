@@ -2,16 +2,15 @@ package version
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 	"net/url"
 	"time"
 
 	"github.com/pkg/errors"
 
-	"github.com/percona/percona-postgresql-operator/percona/version/service/client"
-	"github.com/percona/percona-postgresql-operator/percona/version/service/client/version_service"
-	v2 "github.com/percona/percona-postgresql-operator/pkg/apis/pgv2.percona.com/v2"
+	"github.com/civo/percona-postgresql-operator/percona/version/service/client"
+	"github.com/civo/percona-postgresql-operator/percona/version/service/client/version_service"
+	v2 "github.com/civo/percona-postgresql-operator/pkg/apis/pgv2.percona.com/v2"
 )
 
 type Meta struct {
@@ -31,10 +30,10 @@ type Meta struct {
 }
 
 func EnsureVersion(ctx context.Context, meta Meta) error {
-	err := fetchVersions(ctx, v2.GetDefaultVersionServiceEndpoint(), meta)
-	if err != nil {
-		return errors.Wrap(err, fmt.Sprintf("failed to send telemetry to %s", v2.GetDefaultVersionServiceEndpoint()))
-	}
+	// err := fetchVersions(ctx, v2.GetDefaultVersionServiceEndpoint(), meta)
+	// if err != nil {
+	// 	return errors.Wrap(err, fmt.Sprintf("failed to send telemetry to %s", v2.GetDefaultVersionServiceEndpoint()))
+	// }
 
 	return nil
 }

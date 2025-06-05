@@ -25,14 +25,14 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/percona/percona-postgresql-operator/internal/controller/postgrescluster"
-	"github.com/percona/percona-postgresql-operator/internal/feature"
-	"github.com/percona/percona-postgresql-operator/internal/naming"
-	perconaController "github.com/percona/percona-postgresql-operator/percona/controller"
-	pNaming "github.com/percona/percona-postgresql-operator/percona/naming"
-	"github.com/percona/percona-postgresql-operator/percona/runtime"
-	v2 "github.com/percona/percona-postgresql-operator/pkg/apis/pgv2.percona.com/v2"
-	"github.com/percona/percona-postgresql-operator/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
+	"github.com/civo/percona-postgresql-operator/internal/controller/postgrescluster"
+	"github.com/civo/percona-postgresql-operator/internal/feature"
+	"github.com/civo/percona-postgresql-operator/internal/naming"
+	perconaController "github.com/civo/percona-postgresql-operator/percona/controller"
+	pNaming "github.com/civo/percona-postgresql-operator/percona/naming"
+	"github.com/civo/percona-postgresql-operator/percona/runtime"
+	v2 "github.com/civo/percona-postgresql-operator/pkg/apis/pgv2.percona.com/v2"
+	"github.com/civo/percona-postgresql-operator/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
 )
 
 var _ = Describe("PG Cluster", Ordered, func() {
