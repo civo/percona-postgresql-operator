@@ -118,10 +118,10 @@ func (r *PGClusterReconciler) createScheduledBackup(log logr.Logger, backupName,
 		},
 	}
 
-	if cr.CompareVersion("2.6.0") >= 0 && cr.Spec.Metadata != nil {
-		pb.Annotations = cr.Spec.Metadata.Annotations
-		pb.Labels = cr.Spec.Metadata.Labels
-	}
+	// if cr.CompareVersion("2.6.0") >= 0 && cr.Spec.Metadata != nil {
+	// 	pb.Annotations = cr.Spec.Metadata.Annotations
+	// 	pb.Labels = cr.Spec.Metadata.Labels
+	// }
 
 	err := r.Client.Create(ctx, pb)
 	if err != nil {
