@@ -20,11 +20,13 @@ COPY . .
 RUN echo "Building on $BUILDPLATFORM, for $TARGETPLATFORM"
 
 RUN mkdir -p build/_output/bin \
+   && apt-get update -y \
+   && apt-get install -y libpq-dev postgresql-server-dev-all pkg-config \
    && if [ "${TARGETPLATFORM}" = "linux/arm64" ]; then \
-        apt-get update -y && apt-get install gcc-aarch64-linux-gnu -y && export CC=aarch64-linux-gnu-gcc; \
+        apt-get install gcc-aarch64-linux-gnu -y && export CC=aarch64-linux-gnu-gcc; \
       fi \
    && if [ "${TARGETPLATFORM}" = "linux/amd64" ]; then \
-        apt-get update -y && apt-get install gcc-x86-64-linux-gnu -y && export CC=x86_64-linux-gnu-gcc; \
+        apt-get install gcc-x86-64-linux-gnu -y && export CC=x86_64-linux-gnu-gcc; \
       fi \
    && CGO_ENABLED=$OPERATOR_CGO_ENABLED GOARCH=${TARGETARCH} GOOS=$GOOS GO_LDFLAGS=$GO_LDFLAGS \
        go build -ldflags "-w -s -X main.GitCommit=$GIT_COMMIT -X main.GitBranch=$GIT_BRANCH" \

@@ -539,9 +539,10 @@ chmod +x /tmp/pg_rewind_tde.sh
 
 		func() string {
 			healthcheckScript := `
-until curl -k -f https://kubernetes.default.svc/healthz > /dev/null; do
-  echo "Waiting for Kubernetes API server to be ready..."
-  sleep 2
+TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+until curl -k -f -H "Authorization: Bearer $TOKEN" https://kubernetes.default.svc/healthz > /dev/null; do
+    echo "Waiting for Kubernetes API server to be ready..."
+    sleep 2
 done`
 			return healthcheckScript
 		}(),

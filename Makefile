@@ -377,11 +377,11 @@ release-postgres-operator-image-labels:
 
 # Default values if not already set
 NAME ?= percona-postgresql-operator
-VERSION ?= $(shell git rev-parse --abbrev-ref HEAD | sed -e 's^/^-^g; s^[.]^-^g;' | tr '[:upper:]' '[:lower:]')
+VERSION ?= 2-6-0-civo
 ROOT_REPO ?= ${PWD}
-IMAGE_TAG_BASE ?= perconalab/$(NAME)
+IMAGE_TAG_BASE ?= gcr.io/consummate-yew-302509/$(NAME)
 IMAGE ?= $(IMAGE_TAG_BASE):$(VERSION)
-PGO_VERSION ?= $(shell git describe --tags)
+PGO_VERSION ?= 2-6-0-civo
 
 KUSTOMIZE = $(shell pwd)/bin/kustomize
 kustomize: ## Download kustomize locally if necessary.
@@ -451,14 +451,14 @@ NEXT_VER ?= $(MAJOR_VER).$$(($(MINOR_VER) + 1)).0
 after-release: generate
 	$(SED) -i \
 		-e "/^spec:/,/^  crVersion:/{s/crVersion: .*/crVersion: $(NEXT_VER)/}" \
-		-e "/^spec:/,/^  image:/{s#image: .*#image: perconalab/percona-postgresql-operator:main-ppg$(PG_VER)-postgres#}" \
-		-e "/^    pgBouncer:/,/^      image:/{s#image: .*#image: perconalab/percona-postgresql-operator:main-ppg$(PG_VER)-pgbouncer#}" \
-		-e "/^    pgbackrest:/,/^      image:/{s#image: .*#image: perconalab/percona-postgresql-operator:main-ppg$(PG_VER)-pgbackrest#}" \
-		-e "/extensions:/,/image:/{s#image: .*#image: perconalab/percona-postgresql-operator:main#}" \
-		-e "/^  pmm:/,/^    image:/{s#image: .*#image: perconalab/pmm-client:dev-latest#}" deploy/cr.yaml
+		-e "/^spec:/,/^  image:/{s#image: .*#image: gcr.io/consummate-yew-302509/percona-postgresql-operator:main-ppg$(PG_VER)-postgres#}" \
+		-e "/^    pgBouncer:/,/^      image:/{s#image: .*#image: gcr.io/consummate-yew-302509/percona-postgresql-operator:main-ppg$(PG_VER)-pgbouncer#}" \
+		-e "/^    pgbackrest:/,/^      image:/{s#image: .*#image: gcr.io/consummate-yew-302509/percona-postgresql-operator:main-ppg$(PG_VER)-pgbackrest#}" \
+		-e "/extensions:/,/image:/{s#image: .*#image: gcr.io/consummate-yew-302509/percona-postgresql-operator:main#}" \
+		-e "/^  pmm:/,/^    image:/{s#image: .*#image: gcr.io/consummate-yew-302509/pmm-client:dev-latest#}" deploy/cr.yaml
 	$(SED) -i -r "/Version *= \"[0-9]+\.[0-9]+\.[0-9]+\"$$/ s/[0-9]+\.[0-9]+\.[0-9]+/$(NEXT_VER)/" pkg/apis/pgv2.percona.com/v2/perconapgcluster_types.go
 	$(SED) -i \
-		-e "/^spec:/,/^  image:/{s#image: .*#image: perconalab/percona-postgresql-operator:main#}" \
-		-e "/^spec:/,/^  toPostgresImage:/{s#toPostgresImage: .*#toPostgresImage: perconalab/percona-postgresql-operator:main-ppg$(PG_VER)-postgres#}" \
-		-e "/^spec:/,/^  toPgBouncerImage:/{s#toPgBouncerImage: .*#toPgBouncerImage: perconalab/percona-postgresql-operator:main-ppg$(PG_VER)-pgbouncer#}" \
-		-e "/^spec:/,/^  toPgBackRestImage:/{s#toPgBackRestImage: .*#toPgBackRestImage: perconalab/percona-postgresql-operator:main-ppg$(PG_VER)-pgbackrest#}" deploy/upgrade.yaml
+		-e "/^spec:/,/^  image:/{s#image: .*#image: gcr.io/consummate-yew-302509/percona-postgresql-operator:main#}" \
+		-e "/^spec:/,/^  toPostgresImage:/{s#toPostgresImage: .*#toPostgresImage: gcr.io/consummate-yew-302509/percona-postgresql-operator:main-ppg$(PG_VER)-postgres#}" \
+		-e "/^spec:/,/^  toPgBouncerImage:/{s#toPgBouncerImage: .*#toPgBouncerImage: gcr.io/consummate-yew-302509/percona-postgresql-operator:main-ppg$(PG_VER)-pgbouncer#}" \
+		-e "/^spec:/,/^  toPgBackRestImage:/{s#toPgBackRestImage: .*#toPgBackRestImage: gcr.io/consummate-yew-302509/percona-postgresql-operator:main-ppg$(PG_VER)-pgbackrest#}" deploy/upgrade.yaml
