@@ -8,11 +8,11 @@ import (
 	"slices"
 	"testing"
 
-	"k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
+	v1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	"sigs.k8s.io/yaml"
 
-	"github.com/percona/percona-postgresql-operator/v2/percona/naming"
-	"github.com/percona/percona-postgresql-operator/v2/percona/version"
+	"github.com/civo/percona-postgresql-operator/v2/percona/naming"
+	"github.com/civo/percona-postgresql-operator/v2/percona/version"
 )
 
 func TestCRDVersionLabel(t *testing.T) {

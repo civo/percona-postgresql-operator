@@ -11,8 +11,8 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/utils/ptr"
 
-	pNaming "github.com/percona/percona-postgresql-operator/v2/percona/naming"
-	v2 "github.com/percona/percona-postgresql-operator/v2/pkg/apis/pgv2.percona.com/v2"
+	pNaming "github.com/civo/percona-postgresql-operator/v2/percona/naming"
+	v2 "github.com/civo/percona-postgresql-operator/v2/pkg/apis/pgv2.percona.com/v2"
 )
 
 var _ = Describe("patroni version check", Ordered, func() {

@@ -19,7 +19,7 @@ import (
 	"gotest.tools/v3/assert"
 	"k8s.io/apimachinery/pkg/util/intstr"
 
-	"github.com/percona/percona-postgresql-operator/v2/internal/initialize"
+	"github.com/civo/percona-postgresql-operator/v2/internal/initialize"
 )
 
 var testApiKey = "9012"
