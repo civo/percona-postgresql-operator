@@ -20,6 +20,7 @@ COPY . .
 RUN echo "Building on $BUILDPLATFORM, for $TARGETPLATFORM"
 
 RUN mkdir -p build/_output/bin \
+   && apt-get install -y libpq-dev postgresql-server-dev-all pkg-config \
    && if [ "${TARGETPLATFORM}" = "linux/arm64" ]; then \
         apt-get update -y && apt-get install gcc-aarch64-linux-gnu -y && export CC=aarch64-linux-gnu-gcc; \
       fi \
