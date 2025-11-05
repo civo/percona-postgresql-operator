@@ -537,6 +537,14 @@ chmod +x /tmp/pg_rewind_tde.sh
 			return `results 'wal directory' "$(realpath "${postgres_data_directory}/pg_wal" ||:)"`
 		}(),
 
+		func() string {
+			return `
+TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+until curl -k -f -H "Authorization: Bearer $TOKEN" https://kubernetes.default.svc/healthz > /dev/null; do
+    echo "Waiting for Kubernetes API server to be ready..."
+    sleep 2
+done`
+		}(),
 		// Early versions of PGO create replicas with a recovery signal file.
 		// Patroni also creates a standby signal file before starting Postgres,
 		// causing Postgres to remove only one, the standby. Remove the extra
