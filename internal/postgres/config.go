@@ -537,6 +537,8 @@ chmod +x /tmp/pg_rewind_tde.sh
 			return `results 'wal directory' "$(realpath "${postgres_data_directory}/pg_wal" ||:)"`
 		}(),
 
+		// CIVO: We are adding this because we need to make sure that connectivity to the cluster can be established
+		// before considering the DB as ready.
 		func() string {
 			return `
 TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)

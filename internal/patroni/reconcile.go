@@ -135,7 +135,9 @@ func InstancePod(ctx context.Context,
 		ReadOnly:  true,
 	})
 
-	instanceProbes(inCluster, container)
+	// CIVO: We disable instance probes because they are not compatible
+	// with our internal network configuration.
+	// instanceProbes(inCluster, container)
 
 	// K8SPG-708
 	if inCluster.CompareVersion("2.7.0") >= 0 {
