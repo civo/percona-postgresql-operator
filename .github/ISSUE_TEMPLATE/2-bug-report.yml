@@ -9,7 +9,7 @@ body:
       Thank you for considering to open a bug report!
 
       Before you do, however, make sure to check our existing resources to see if it has already been discussed/reported:
-      - [Reported bugs](https://github.com/percona/percona-postgresql-operator/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Abug)
+      - [Reported bugs](https://github.com/civo/percona-postgresql-operator/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Abug)
       - [JIRA bugs](https://perconadev.atlassian.net/issues/?jql=project%20%3D%20%22Percona%20Operator%20for%20PostgreSQL%22%20and%20issuetype%20%3D%20Bug%20and%20resolution%20%3D%20unresolved%20order%20BY%20created%20DESC)
       - [Percona Operator for PostgreSQL forum](https://forums.percona.com/c/postgresql/percona-kubernetes-operator-for-postgresql/68)
 - type: textarea

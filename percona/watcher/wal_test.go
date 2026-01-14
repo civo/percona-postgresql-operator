@@ -6,14 +6,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/percona/percona-postgresql-operator/v2/percona/version"
+	"github.com/civo/percona-postgresql-operator/v2/percona/version"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/percona/percona-postgresql-operator/v2/percona/testutils"
-	pgv2 "github.com/percona/percona-postgresql-operator/v2/pkg/apis/pgv2.percona.com/v2"
+	"github.com/civo/percona-postgresql-operator/v2/percona/testutils"
+	pgv2 "github.com/civo/percona-postgresql-operator/v2/pkg/apis/pgv2.percona.com/v2"
 )
 
 func mustParseTime(layout string, value string) time.Time {

@@ -29,10 +29,10 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	"sigs.k8s.io/yaml"
 
-	"github.com/percona/percona-postgresql-operator/v2/internal/naming"
-	"github.com/percona/percona-postgresql-operator/v2/internal/registration"
-	"github.com/percona/percona-postgresql-operator/v2/internal/testing/require"
-	"github.com/percona/percona-postgresql-operator/v2/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
+	"github.com/civo/percona-postgresql-operator/v2/internal/naming"
+	"github.com/civo/percona-postgresql-operator/v2/internal/registration"
+	"github.com/civo/percona-postgresql-operator/v2/internal/testing/require"
+	"github.com/civo/percona-postgresql-operator/v2/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
 )
 
 func TestDeleteControlled(t *testing.T) {
@@ -93,7 +93,7 @@ var olmClusterYAML = `
 metadata:
   name: olm
 spec:
-  postgresVersion: 13
+  postgresVersion: 17
   image: postgres
   instances:
   - name: register-now
@@ -231,7 +231,7 @@ var _ = Describe("PostgresCluster Reconciler", func() {
 metadata:
   name: carlos
 spec:
-  postgresVersion: 13
+  postgresVersion: 17
   image: postgres
   instances:
   - name: samba
@@ -438,7 +438,7 @@ spec:
 metadata:
   name: carlos
 spec:
-  postgresVersion: 13
+  postgresVersion: 17
   image: postgres
   instances:
   - name: samba
@@ -660,7 +660,7 @@ spec:
 metadata:
   name: test-cluster
 spec:
-  postgresVersion: 13
+  postgresVersion: 17
   image: postgres
   instances:
   - name: instance1

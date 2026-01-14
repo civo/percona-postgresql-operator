@@ -2,7 +2,7 @@
 
 # set root repo relatively to a test dir
 ROOT_REPO=${ROOT_REPO:-$(realpath ../../..)}
-CERT_MANAGER_VER="1.18.2"
+CERT_MANAGER_VER="1.19.1"
 test_name=$(basename "$(pwd)")
 source "${ROOT_REPO}/e2e-tests/vars.sh"
 
@@ -493,6 +493,18 @@ get_service_ip() {
 	done
 	kubectl get service/$service -n "${NAMESPACE}" -o 'jsonpath={.status.loadBalancer.ingress[].ip}'
 	kubectl get service/$service -n "${NAMESPACE}" -o 'jsonpath={.status.loadBalancer.ingress[].hostname}'
+}
+
+get_version_images() {
+	local cr_version="$1"
+	local component="$2"
+	local release_versions_file="${TEMP_DIR}/release_version_${cr_version}"
+
+	if [[ ! -f $release_versions_file ]]; then
+		curl -s "https://raw.githubusercontent.com/percona/percona-postgresql-operator/refs/tags/v${cr_version}/e2e-tests/release_versions" >$release_versions_file
+	fi
+
+	grep -i ${component} $release_versions_file | cut -d'=' -f2
 }
 
 wait_for_delete() {
@@ -1036,16 +1048,22 @@ get_desired_replicas() {
 	kubectl get statefulset "$1" -n "$NAMESPACE" -o jsonpath='{.spec.replicas}'
 }
 
+get_ready_replicas() {
+	kubectl get sts "$1" -n "$NAMESPACE" -o jsonpath='{.status.readyReplicas}'
+}
+
 wait_sts_rollout() {
 	local sts=$1
+	local ready_replicas=$(get_ready_replicas $sts)
 	local updated_replicas=$(get_updated_replicas $sts)
 	local desired_replicas=$(get_desired_replicas $sts)
+	echo "ready_replicas $ready_replicas desired_replicas $desired_replicas"
 
-	until [[ $updated_replicas -eq $desired_replicas ]]; do
-		updated_replicas=$(get_updated_replicas $sts)
+	until [[ $ready_replicas -eq $desired_replicas && $updated_replicas -eq $desired_replicas ]]; do
+		ready_replicas=$(get_ready_replicas $sts)
 		desired_replicas=$(get_desired_replicas $sts)
-
-		echo "Waiting for sts/$sts to update... $updated_replicas/$desired_replicas pods updated."
+		updated_replicas=$(get_updated_replicas $sts)
+		echo "Waiting for sts/$sts to update... $ready_replicas/$updated_replicas/$desired_replicas pods updated."
 		sleep 10
 	done
 }
@@ -1108,7 +1126,11 @@ get_container_image() {
 		operatorVersion=main
 	fi
 
-	echo "${IMAGE_BASE}:${operatorVersion}-ppg${pgVersion}-${component}"
+	if [[ $component == 'pgbouncer' || $component == 'pgbackrest' ]]; then
+		echo "${IMAGE_BASE}:${operatorVersion}-${component}${pgVersion}"
+	else
+		echo "${IMAGE_BASE}:${operatorVersion}-ppg${pgVersion}-${component}"
+	fi
 }
 
 get_postgresql_logs() {

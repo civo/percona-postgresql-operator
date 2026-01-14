@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/percona/percona-postgresql-operator/v2/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
+	"github.com/civo/percona-postgresql-operator/v2/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
 )
 
 // defaultFromEnv reads the environment variable key when value is empty.

@@ -16,7 +16,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/intstr"
 
-	pNaming "github.com/percona/percona-postgresql-operator/v2/percona/naming"
+	pNaming "github.com/civo/percona-postgresql-operator/v2/percona/naming"
 )
 
 // PostgresClusterSpec defines the desired state of PostgresCluster
@@ -129,7 +129,7 @@ type PostgresClusterSpec struct {
 	// The major version of PostgreSQL installed in the PostgreSQL image
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:Minimum=12
-	// +kubebuilder:validation:Maximum=17
+	// +kubebuilder:validation:Maximum=18
 	// +operator-sdk:csv:customresourcedefinitions:type=spec,order=1
 	PostgresVersion int `json:"postgresVersion"`
 

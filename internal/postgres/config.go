@@ -11,10 +11,10 @@ import (
 
 	corev1 "k8s.io/api/core/v1"
 
-	"github.com/percona/percona-postgresql-operator/v2/internal/config"
-	"github.com/percona/percona-postgresql-operator/v2/internal/feature"
-	"github.com/percona/percona-postgresql-operator/v2/internal/naming"
-	"github.com/percona/percona-postgresql-operator/v2/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
+	"github.com/civo/percona-postgresql-operator/v2/internal/config"
+	"github.com/civo/percona-postgresql-operator/v2/internal/feature"
+	"github.com/civo/percona-postgresql-operator/v2/internal/naming"
+	"github.com/civo/percona-postgresql-operator/v2/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
 )
 
 const (
@@ -162,6 +162,21 @@ func Environment(cluster *v1beta1.PostgresCluster) []corev1.EnvVar {
 			Name:  "LDAPTLS_CACERT",
 			Value: configMountPath + "/ldap/ca.crt",
 		})
+	}
+
+	if cluster.CompareVersion("2.8.0") >= 0 {
+		env = append(env, []corev1.EnvVar{
+			// Critical for major upgrades to avoid lc_collate mismatches.
+			// - https://www.postgresql.org/docs/current/locale.html
+			{
+				Name:  "LC_ALL",
+				Value: "en_US.utf-8",
+			},
+			{
+				Name:  "LANG",
+				Value: "en_US.utf-8",
+			},
+		}...)
 	}
 
 	return env
@@ -537,6 +552,16 @@ chmod +x /tmp/pg_rewind_tde.sh
 			return `results 'wal directory' "$(realpath "${postgres_data_directory}/pg_wal" ||:)"`
 		}(),
 
+		// CIVO: We are adding this because we need to make sure that connectivity to the cluster can be established
+		// before considering the DB as ready.
+		func() string {
+			return `
+TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+until curl -k -f -H "Authorization: Bearer $TOKEN" https://kubernetes.default.svc/healthz > /dev/null; do
+    echo "Waiting for Kubernetes API server to be ready..."
+    sleep 2
+done`
+		}(),
 		// Early versions of PGO create replicas with a recovery signal file.
 		// Patroni also creates a standby signal file before starting Postgres,
 		// causing Postgres to remove only one, the standby. Remove the extra
