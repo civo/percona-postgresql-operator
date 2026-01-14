@@ -10,10 +10,10 @@ import (
 
 	corev1 "k8s.io/api/core/v1"
 
-	"github.com/percona/percona-postgresql-operator/v2/internal/logging"
-	"github.com/percona/percona-postgresql-operator/v2/internal/postgres"
-	"github.com/percona/percona-postgresql-operator/v2/internal/postgres/password"
-	"github.com/percona/percona-postgresql-operator/v2/internal/util"
+	"github.com/civo/percona-postgresql-operator/v2/internal/logging"
+	"github.com/civo/percona-postgresql-operator/v2/internal/postgres"
+	"github.com/civo/percona-postgresql-operator/v2/internal/postgres/password"
+	"github.com/civo/percona-postgresql-operator/v2/internal/util"
 )
 
 const (

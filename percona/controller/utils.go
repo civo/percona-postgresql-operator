@@ -11,8 +11,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 
-	"github.com/percona/percona-postgresql-operator/v2/internal/logging"
-	"github.com/percona/percona-postgresql-operator/v2/internal/naming"
+	"github.com/civo/percona-postgresql-operator/v2/internal/logging"
+	"github.com/civo/percona-postgresql-operator/v2/internal/naming"
 )
 
 // jobCompleted returns "true" if the Job provided completed successfully.  Otherwise it returns

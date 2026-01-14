@@ -22,8 +22,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 
-	"github.com/percona/percona-postgresql-operator/v2/internal/logging"
-	"github.com/percona/percona-postgresql-operator/v2/internal/testing/require"
+	"github.com/civo/percona-postgresql-operator/v2/internal/logging"
+	"github.com/civo/percona-postgresql-operator/v2/internal/testing/require"
 )
 
 var suite struct {

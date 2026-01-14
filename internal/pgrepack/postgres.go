@@ -3,8 +3,8 @@ package pgrepack
 import (
 	"context"
 
-	"github.com/percona/percona-postgresql-operator/v2/internal/logging"
-	"github.com/percona/percona-postgresql-operator/v2/internal/postgres"
+	"github.com/civo/percona-postgresql-operator/v2/internal/logging"
+	"github.com/civo/percona-postgresql-operator/v2/internal/postgres"
 )
 
 // EnableInPostgreSQL installs pg_repack triggers into every database.

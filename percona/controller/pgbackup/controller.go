@@ -23,15 +23,15 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	"sigs.k8s.io/controller-runtime/pkg/source"
 
-	"github.com/percona/percona-postgresql-operator/v2/internal/logging"
-	"github.com/percona/percona-postgresql-operator/v2/internal/naming"
-	"github.com/percona/percona-postgresql-operator/v2/percona/clientcmd"
-	"github.com/percona/percona-postgresql-operator/v2/percona/controller"
-	pNaming "github.com/percona/percona-postgresql-operator/v2/percona/naming"
-	"github.com/percona/percona-postgresql-operator/v2/percona/pgbackrest"
-	"github.com/percona/percona-postgresql-operator/v2/percona/watcher"
-	v2 "github.com/percona/percona-postgresql-operator/v2/pkg/apis/pgv2.percona.com/v2"
-	"github.com/percona/percona-postgresql-operator/v2/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
+	"github.com/civo/percona-postgresql-operator/v2/internal/logging"
+	"github.com/civo/percona-postgresql-operator/v2/internal/naming"
+	"github.com/civo/percona-postgresql-operator/v2/percona/clientcmd"
+	"github.com/civo/percona-postgresql-operator/v2/percona/controller"
+	pNaming "github.com/civo/percona-postgresql-operator/v2/percona/naming"
+	"github.com/civo/percona-postgresql-operator/v2/percona/pgbackrest"
+	"github.com/civo/percona-postgresql-operator/v2/percona/watcher"
+	v2 "github.com/civo/percona-postgresql-operator/v2/pkg/apis/pgv2.percona.com/v2"
+	"github.com/civo/percona-postgresql-operator/v2/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
 )
 
 const (

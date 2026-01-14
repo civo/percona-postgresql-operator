@@ -7,8 +7,8 @@ package pgbackrest
 import (
 	"strings"
 
-	"github.com/percona/percona-postgresql-operator/v2/internal/postgres"
-	"github.com/percona/percona-postgresql-operator/v2/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
+	"github.com/civo/percona-postgresql-operator/v2/internal/postgres"
+	"github.com/civo/percona-postgresql-operator/v2/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
 )
 
 // PostgreSQL populates outParameters with any settings needed to run pgBackRest.

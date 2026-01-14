@@ -12,10 +12,10 @@ import (
 	corev1 "k8s.io/api/core/v1"
 	"sigs.k8s.io/yaml"
 
-	"github.com/percona/percona-postgresql-operator/v2/internal/config"
-	"github.com/percona/percona-postgresql-operator/v2/internal/naming"
-	"github.com/percona/percona-postgresql-operator/v2/internal/postgres"
-	"github.com/percona/percona-postgresql-operator/v2/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
+	"github.com/civo/percona-postgresql-operator/v2/internal/config"
+	"github.com/civo/percona-postgresql-operator/v2/internal/naming"
+	"github.com/civo/percona-postgresql-operator/v2/internal/postgres"
+	"github.com/civo/percona-postgresql-operator/v2/pkg/apis/postgres-operator.crunchydata.com/v1beta1"
 )
 
 const (
